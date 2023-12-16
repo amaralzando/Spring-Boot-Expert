@@ -1,7 +1,6 @@
 package br.com.thegroupgasa;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,38 +20,14 @@ public class Main {
         return args -> {
 
             System.out.println("Salvando clientes");
-            clientes.salvar(new Cliente("Gabriel Amaral"));
-            clientes.salvar(new Cliente("Jeferson"));
+            clientes.save(new Cliente("Gabriel Amaral"));
+            clientes.save(new Cliente("Jeferson"));
 
-            System.out.println("Listando todos os clientes");
-            List<Cliente> todosClientes = clientes.obterTodos();
-            todosClientes.forEach(System.out::println);
+            boolean existNome = clientes.existsByNome("Gabriel Amaral");
+            System.out.println("Existe um cliente com o nome Gabriel Amaral? " + existNome);
 
-            System.out.println("Atualizando clientes");
-            todosClientes.forEach(c -> {
-                c.setNome(c.getNome() + " atualizado.");
-                clientes.atualizar(c);
-            });
-            
-            System.out.println("Listando todos os clientes Atualizados");
-            todosClientes = clientes.obterTodos();
-            todosClientes.forEach(System.out::println);
-
-            System.out.println("Buscando clientes por nome");
-            clientes.obterPorNome("Gabr").forEach(System.out::println);
-
-            System.out.println("Deletando todos os clientes");
-            clientes.obterTodos().forEach(c -> {
-                clientes.deletar(c);
-            });
-
-            todosClientes = clientes.obterTodos();
-            if(todosClientes.isEmpty()){
-                System.out.println("Nenhum cliente encontrado");
-            }else{
-                todosClientes.forEach(System.out::println);
-            }
-
+            List<Cliente> result = clientes.encontrarPorNome("Gabriel Amaral");
+            result.forEach(System.out::println);
         };
     }
 
