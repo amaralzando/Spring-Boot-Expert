@@ -21,8 +21,8 @@ public class Main {
         return args -> {
 
             System.out.println("Salvando clientes");
-            clientes.salvar(new Cliente("Gabriel Amaral"));    
-            clientes.salvar(new Cliente("Jeferson"));  
+            clientes.salvar(new Cliente("Gabriel Amaral"));
+            clientes.salvar(new Cliente("Jeferson"));
 
             System.out.println("Listando todos os clientes");
             List<Cliente> todosClientes = clientes.obterTodos();
@@ -33,6 +33,7 @@ public class Main {
                 c.setNome(c.getNome() + " atualizado.");
                 clientes.atualizar(c);
             });
+            
             System.out.println("Listando todos os clientes Atualizados");
             todosClientes = clientes.obterTodos();
             todosClientes.forEach(System.out::println);
