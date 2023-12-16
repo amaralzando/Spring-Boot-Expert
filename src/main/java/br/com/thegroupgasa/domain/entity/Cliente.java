@@ -1,14 +1,18 @@
 package br.com.thegroupgasa.domain.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Cliente")
+@Table(name = "cliente")
 public class Cliente {
 
     @Id
@@ -18,6 +22,17 @@ public class Cliente {
 
     @Column(name = "nome")
     private String nome;
+
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    private Set<Pedido> pedidos;
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 
     public Cliente() {
     }
