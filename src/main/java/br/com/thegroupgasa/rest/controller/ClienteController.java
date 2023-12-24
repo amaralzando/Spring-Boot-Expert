@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -55,7 +57,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente postCliente(@RequestBody Cliente cliente) {
+    public Cliente postCliente(@RequestBody @Valid Cliente cliente) {
         Cliente clienteNovo = clienteRepository.save(cliente);
         return clienteNovo;
     }
@@ -78,7 +80,7 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     public void putCliente(@PathVariable Integer id,
-                                        @RequestBody Cliente cliente) {
+                                        @RequestBody @Valid Cliente cliente) {
         clienteRepository.findById(id)
             .map( clienteExistente -> {
                 cliente.setId(clienteExistente.getId());

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.Valid;
+
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
@@ -56,7 +58,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Produto postProduto(@RequestBody Produto produto) {
+    public Produto postProduto(@RequestBody @Valid Produto produto) {
         Produto produtoNovo = produtoRepository.save(produto);
         return produtoNovo;
 
@@ -80,7 +82,7 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     public void putProduto(@PathVariable Integer id,
-                                        @RequestBody Produto produto) {
+                                        @RequestBody @Valid Produto produto) {
         produtoRepository
             .findById(id)
             .map( produtoExistente -> {
