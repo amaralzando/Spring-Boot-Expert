@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class Pedido {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer Id;
 
